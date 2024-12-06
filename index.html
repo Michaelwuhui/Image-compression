@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片压缩工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>图片压缩工具</h1>
+            <p>支持 PNG、JPG 格式图片压缩</p>
+        </header>
+
+        <main>
+            <!-- 上传区域 -->
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="imageInput" accept="image/png, image/jpeg" hidden>
+                <div class="upload-box">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M32 8L18 22H28V42H36V22H46L32 8Z" fill="#007AFF"/>
+                        <path d="M56 42V50H8V42H0V54C0 56.2091 1.79086 58 4 58H60C62.2091 58 64 56.2091 64 54V42H56Z" fill="#007AFF"/>
+                    </svg>
+                    <p>点击或拖拽图片到此处</p>
+                </div>
+            </div>
+
+            <!-- 预览和控制区域 -->
+            <div class="preview-container" id="previewContainer" style="display: none;">
+                <div class="preview-box">
+                    <div class="original-image">
+                        <h3>原始图片</h3>
+                        <div class="image-container">
+                            <img id="originalPreview" alt="原始图片预览">
+                            <button class="fullscreen-btn" data-target="originalPreview">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M3 3h7v2H5v5H3V3m18 0h-7v2h5v5h2V3M3 21h7v-2H5v-5H3v7m18 0h-7v-2h5v-5h2v7" fill="currentColor"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="file-info">
+                            <span>文件大小：</span>
+                            <span id="originalSize">0 KB</span>
+                        </div>
+                    </div>
+                    <div class="compressed-image">
+                        <h3>压缩后</h3>
+                        <div class="image-container">
+                            <img id="compressedPreview" alt="压缩后预览">
+                            <button class="fullscreen-btn" data-target="compressedPreview">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M3 3h7v2H5v5H3V3m18 0h-7v2h5v5h2V3M3 21h7v-2H5v-5H3v7m18 0h-7v-2h5v-5h2v7" fill="currentColor"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="file-info">
+                            <span>文件大小：</span>
+                            <span id="compressedSize">0 KB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <div class="quality-control">
+                        <label for="qualitySlider">压缩质量：</label>
+                        <input type="range" id="qualitySlider" min="0" max="100" value="80">
+                        <span id="qualityValue">80%</span>
+                    </div>
+                    <button id="downloadBtn" class="download-btn">下载压缩图片</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <!-- 全屏预览模态框 -->
+    <div id="fullscreenModal" class="fullscreen-modal">
+        <div class="modal-content">
+            <div class="fullscreen-preview">
+                <!-- 图片对比容器 -->
+                <div class="comparison-container">
+                    <img id="fullscreenOriginal" alt="原图预览" class="comparison-image">
+                    <img id="fullscreenCompressed" alt="压缩效果预览" class="comparison-image">
+                    <div class="comparison-slider">
+                        <div class="slider-line"></div>
+                        <div class="slider-handle">
+                            <div class="handle-line"></div>
+                            <div class="handle-arrows">
+                                <span class="arrow-left">◄</span>
+                                <span class="arrow-right">►</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-labels">
+                        <span class="label-left">原图</span>
+                        <span class="label-right">压缩效果</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 全屏模式下的控制栏 -->
+            <div class="fullscreen-controls">
+                <div class="quality-control">
+                    <label for="fullscreenQualitySlider">压缩质量：</label>
+                    <input type="range" id="fullscreenQualitySlider" min="0" max="100" value="80">
+                    <span id="fullscreenQualityValue">80%</span>
+                </div>
+            </div>
+            <button class="close-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="currentColor"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</body>
+</html> 
